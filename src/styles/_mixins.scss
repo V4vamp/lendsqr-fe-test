@@ -1,0 +1,101 @@
+@mixin flex-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-start($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+@mixin space-between ($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin grid-box(
+    $column: auto,
+    $row: auto,
+    $column-gap: 1rem,
+    $row-gap: 1rem,
+    $justify: stretch,
+    $align: stretch,
+){
+    display: grid;
+    grid-template-columns: $column;
+    grid-template-rows: $row;
+    grid-column-gap: $column-gap;
+    grid-row-gap: $row-gap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin border($style, $size, $color, $radius){
+    border: $style $size $color;
+    border-radius: $radius;
+}
+
+@mixin box-shadow($x-offset, $y-offset, $blur, $color){
+    box-shadow: $x-offset $y-offset $blur $color;
+}
+
+@mixin linear-gradient($direction, $color-stops) {
+  background: linear-gradient($direction, $color-stops);
+}
+
+$breakpoints: (
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px
+);
+
+@each $size, $value in $breakpoints {
+  @media (min-width: $value) {
+    .container-#{$size} {
+      width: 100%;
+    }
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin retina {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @content;
+  }
+}
+
+@mixin print {
+  @media print {
+    @content;
+  }
+}
+
+@mixin dark-mode {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}

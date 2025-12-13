@@ -3,6 +3,36 @@
   --foreground: #171717;
 }
 
+@font-face {
+  font-family: Avenir;
+  src: url("../assets/fonts/AvenirNextLTPro-Regular.otf");
+}
+
+@font-face {
+  font-family: Avenir-medium;
+  src: url("../assets/fonts/AvenirNextLTPro-MediumIt.otf");
+}
+
+@font-face {
+  font-family: Avenir-bold;
+  src: url("../assets/fonts/AvenirNextLTPro-Bold.otf");
+}
+
+@font-face {
+  font-family: Avenir-heavy;
+  src: url("../assets/fonts/AvenirNextLTPro-Heavy.otf");
+}
+
+@font-face {
+  font-family: Avenir-light;
+  src: url("../assets/fonts/AvenirNextLTPro-UltLt.otf");
+}
+
+@font-face {
+  font-family: Avenir-semi;
+  src: url("../assets/fonts/AvenirNextLTPro-Demi.otf");
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
