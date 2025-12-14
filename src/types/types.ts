@@ -26,6 +26,12 @@ export interface AuthSession {
   token: AuthToken;
 }
 
+export interface PasswordResetToken {
+  token: string;
+  email: string;
+  expiresAt: number;
+}
+
 export interface Guarantor {
   fullName: string;
   phone: string;

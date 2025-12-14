@@ -1,10 +1,10 @@
 import FormPage from "@/components/FormPage/FormPage";
-import Signin from "@/components/SignIn/Signin";
+import SignUp from "@/components/SignUp/SignUp";
 
 const Page = () => {
     return ( 
         <FormPage>
-            <Signin />
+            <SignUp />
         </FormPage>
      );
 }

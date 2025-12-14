@@ -32,8 +32,9 @@
 
         }
     }
+
     .errorMessage {
-        font-family: Avenir;
+        font-family: Avenir-semi;
         font-weight: 400;
         font-size: 14px;
         line-height: 100%;
@@ -41,11 +42,11 @@
         color: #E4033B;
         align-self: center;
     }
-    label {
+
+    .labelItem {
         width: 100%;
         @include flex-start($direction: column);
         gap: 8px;
-        position: relative;
         font-family: Avenir-semi;
         font-weight: 500;
         font-size: 14px;
@@ -77,6 +78,7 @@
                 outline: none;
             }
         }
+
         input:focus {
             border-color: #39CDCC;
             background: transparent;
@@ -111,6 +113,46 @@
         }
     }
 
+    .showPassword {
+        @include flex-start;
+        width: 100%;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: Avenir-semi;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        color: #213F7D;
+    }
+
+    input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        width: 16px;
+        height: 16px;
+        padding: 2px;
+        border-radius: 4px;
+        border: 1px solid var(--Foundation-Grey-grey-100, #D8D8D8);
+        background: transparent;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: all 0.3s ease-in;
+    }
+
+    input[type="checkbox"]:checked {
+        background: #213F7D;
+        border-color: #213F7D;
+        padding: 2px;
+    }
+
+
     a {
         font-family: Avenir-semi;
         font-weight: 600;
@@ -122,7 +164,7 @@
         color: #39CDCC;
     }
 
-    .signupButton {
+    .resetButton {
         width: 100%;
         background: #39CDCC;
         height: 48px;

@@ -1,0 +1,44 @@
+@use "../../styles/mixins" as *;
+
+.page {
+    width: 100%;
+    height: 100dvh;
+    @include flex-start;
+    overflow: hidden;
+    background: #FFFFFF;
+
+    .pageImage {
+        width: 50%;
+        height: 100%;
+        @include flex-start($direction: column);
+        align-items: flex-start;
+        padding: 0 68px;
+        gap: 132px;
+
+        .logoContainer {
+            position: relative;
+            width: 172px;
+            height: 36px;
+            margin-top: 106px;
+
+            img {
+                object-fit: contain;
+            }
+        }
+
+        .backgroundImage {
+            position: relative;
+            width: 600px;
+            height: 338px;
+        }
+    }
+
+    .formArea {
+        width: 50%;
+        height: 100%;
+        border: 2px solid #545F7D26;
+        @include flex-start;
+        box-shadow: 0px 15px 90px 0px #00000008;
+        background: #FFFFFF;
+    }
+}
