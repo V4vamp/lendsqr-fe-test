@@ -1,0 +1,85 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import styles from "./nav.module.scss";
+import Image from "next/image";
+import Link from "next/link";
+import { HiSearch } from "react-icons/hi";
+import { getSession, clearSession } from "@/utils/auth";
+import { MdOutlineArrowDropDown } from "react-icons/md";
+
+const Navbar = () => {
+  const [isDropdown, setIsDropdown] = useState<boolean>(false);
+  const [mounted, setMounted] = useState(false);
+  const [session, setSession] = useState<any>(null);
+
+  useEffect(() => {
+    setMounted(true);
+    setSession(getSession());
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  const handleClickDropdown = () => {
+    setIsDropdown((prev) => !prev);
+  };
+
+  const logout = () => {
+    clearSession();
+    window.location.href = "/signin";
+  };
+
+  return (
+    <nav className={styles.navbar}>
+      <Link href={"/"} className={styles.navLogo}>
+        <Image src={"/images/logo.png"} alt="Lendsqr" width={144} height={30} />
+      </Link>
+      <div className={styles.navItems}>
+        <div className={styles.inputWrapper}>
+          <input type="text" placeholder="Search for anything" />
+          <button>
+            <HiSearch color="#FFF" size={14} />
+          </button>
+        </div>
+        <div className={styles.userActions}>
+          <Link href={"#"} className={styles.docsLink}>
+            Docs
+          </Link>
+          <span>
+            <Image
+              src={"/svgs/bell.svg"}
+              alt="Lendsqr"
+              width={20}
+              height={20}
+            />
+          </span>
+          <div className={styles.userInfo}>
+            <div className={styles.avatarWrapper}>
+              <Image
+                src={"/images/user.png"}
+                alt="Lendsqr"
+                fill
+                className={styles.userAvatar}
+              />
+            </div>
+            <span onClick={handleClickDropdown} className={styles.userName}>
+              {session?.user?.firstName || "User"}
+              <MdOutlineArrowDropDown color="#213F7D" size={20} />
+            </span>
+          </div>
+        </div>
+      </div>
+      {isDropdown && (
+        <div className={styles.dropdown}>
+          <span>Profile</span>
+          <span>Settings</span>
+          <span onClick={logout}>Logout</span>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

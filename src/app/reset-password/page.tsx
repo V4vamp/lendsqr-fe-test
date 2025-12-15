@@ -103,7 +103,6 @@ export default function ResetPasswordPage() {
             value={passwordData.confirmPassword}
             onChange={handlePasswordChange}
             name="confirmPassword"
-            // required
           />
             {errors.confirmPassword && <p className={styles.errorText}>*{errors.confirmPassword}</p>}
         </label>
