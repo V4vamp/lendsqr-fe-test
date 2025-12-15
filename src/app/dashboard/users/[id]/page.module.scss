@@ -1,0 +1,87 @@
+@use "../../../../styles/mixins" as *;
+@use "../../../../styles/fonts" as *;
+
+.userPage {
+    width: 100%;
+    @include flex-start($direction: column);
+    gap: 16px;
+
+    .goBackLink {
+        @include flex-start;
+        align-items: center;
+        gap: 8px;
+
+        span {
+            font-family: $work;
+            color: $primary-color;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 0px;
+        }
+    }
+
+    .pageHeader {
+        width: 100%;
+        @include flex-start;
+        align-items: center;
+        justify-content: space-between;
+
+        h1 {
+            color: $primary-color;
+            font-family: $work;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0px;
+        }
+
+        .actionButtons {
+            @include flex-start;
+            align-items: center;
+            gap: 12px;
+
+            button {
+                width: 170;
+                height: 40;
+                opacity: 1;
+                border-radius: 8px;
+                cursor: pointer;
+                font-family: $work;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 100%;
+                letter-spacing: 10%;
+                text-align: center;
+                text-transform: uppercase;
+
+            }
+
+            .activate {
+                border: $secondary-color 1px solid;
+                background: $white;
+                color: $secondary-color;
+            }
+
+            .active {
+                border: $white 1px solid;
+                background-color: $secondary-color;
+                color: $white;
+                cursor: not-allowed;
+            }
+
+            .blacklist {
+                border: $danger 1px solid;
+                background-color: $white;
+                color: $danger;
+            }
+
+            .blacklisted {
+                border: $white 1px solid;
+                background: $danger;
+                color: $white;
+                cursor: not-allowed;
+            }
+        }
+    }
+}

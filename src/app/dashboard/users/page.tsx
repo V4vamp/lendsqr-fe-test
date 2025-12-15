@@ -6,13 +6,13 @@ import styles from "./page.module.scss";
 import api from "@/lib/api";
 import { User } from "@/types/types";
 import Image from "next/image";
+import UsersTable from "@/components/UsersTable/UsersTable";
 
 const Page = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -38,7 +38,9 @@ const Page = () => {
   const activeUsers = users.filter((user) => user.status === "Active").length;
 
   const usersWithSavings = users.filter(
-    (u) => u.education.monthlyIncome !== "0"
+    (user) =>
+      Boolean(user.education.monthlyIncome) &&
+      user.education.monthlyIncome !== "0"
   ).length;
 
   const usersWithLoan = users.filter(
@@ -99,6 +101,7 @@ const Page = () => {
             <h4>{usersWithSavings}</h4>
           </div>
         </div>
+        <UsersTable users={users} />
       </main>
     </Layout>
   );

@@ -1,0 +1,50 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/fonts" as *;
+
+.paginationWrapper {
+  @include flex-start;
+  margin-top: 24px;
+  justify-content: space-between;
+}
+
+.showing {
+  font-size: 14px;
+  color: #545f7d;
+
+  span {
+    background: #213f7d1a;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin: 0 4px;
+    font-weight: 500;
+  }
+}
+
+.pagination {
+  @include flex-start;
+  gap: 8px;
+
+  button {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    color: #545f7d;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  .active {
+    background: #213f7d;
+    color: #fff;
+  }
+}
+
+.ellipsis {
+  color: #545f7d;
+}

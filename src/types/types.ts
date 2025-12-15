@@ -73,7 +73,7 @@ export interface Socials {
 }
 
 export interface User {
-  id: string;
+  id: number;
   organization: string;
   username: string;
   email: string;
