@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -65,7 +66,9 @@ const Page = () => {
             <h4>{usersCount}</h4>
           </div>
           <div className={styles.card}>
-            <span className={styles.iconWrapper}>
+            <span style={{
+              background: "rgba(87, 24, 255, 0.1)"
+            }} className={styles.iconWrapper}>
               <Image
                 src={"/svgs/active-users.svg"}
                 alt={"lendsqr"}
@@ -76,8 +79,10 @@ const Page = () => {
             <p>active users</p>
             <h4>{activeUsers}</h4>
           </div>
-          <div className={styles.card}>
-            <span className={styles.iconWrapper}>
+          <div  className={styles.card}>
+            <span style={{
+            background: "rgba(245, 95, 68, 0.1)"
+          }} className={styles.iconWrapper}>
               <Image
                 src={"/svgs/users-loans.svg"}
                 alt={"lendsqr"}
@@ -89,7 +94,9 @@ const Page = () => {
             <h4>{usersWithLoan}</h4>
           </div>
           <div className={styles.card}>
-            <span className={styles.iconWrapper}>
+            <span style={{
+              background: "rgba(255, 51, 102, 0.1)"
+            }} className={styles.iconWrapper}>
               <Image
                 src={"/svgs/users-savings.svg"}
                 alt={"lendsqr"}

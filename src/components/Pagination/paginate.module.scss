@@ -6,6 +6,7 @@
   width: 100%;
   margin-top: 24px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .showing {
@@ -16,41 +17,71 @@
   align-items: center;
 
   span {
-    background: #213f7d1a;
+    background: #213F7D1A;
     padding: 6px 10px;
     border-radius: 4px;
     margin: 0 4px;
     font-weight: 500;
-    font-family: $work
+    font-family: $work;
+    select {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: $tertiary-color;
+    }
   }
 }
 
 .pagination {
   @include flex-start;
+  align-items: center ;
   gap: 8px;
 
-  button {
+  .prev, .next {
     width: 28px;
     height: 28px;
     border-radius: 4px;
     border: none;
-    background: transparent;
-    color: #545f7d;
+    background: #213F7D1A;
+    color: rgba(33, 63, 125, 1);
     cursor: pointer;
     font-family: $work;
 
     &:disabled {
-      opacity: 0.4;
+      color: rgba(33, 63, 125, 0.6);
       cursor: not-allowed;
     }
   }
 
+  .pageButton {
+    color: $primary-color;
+    font-family: $work;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+
+
   .active {
-    background: #213f7d;
-    color: #fff;
+    color: #213f7d;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: transparent;
+    border: none;
   }
 }
 
 .ellipsis {
   color: #545f7d;
+}
+
+@include mobile {
+  .paginationWrapper {
+    width: 100%;
+    @include flex-start($direction: column);
+    align-items: center;
+    gap: 12px;
+  }
 }

@@ -4,15 +4,16 @@
 
 .userTable {
     width: 100%;
-    height: 55dvh;
     @include flex-start($direction: column);
-    overflow: hidden;
+
+    .mobileTable {
+        display: none;
+    }
 
     .tableWrapper {
         width: 100%;
         border: 1px solid #213F7D0F;
         border-radius: 8px;
-        overflow-x: auto;
         background: #fff;
         padding: 0 24px;
     }
@@ -27,7 +28,7 @@
     .tableHead {
         th {
             width: calc(100% / 6);
-            padding: 16px;
+            padding: 16px 0;
             text-align: left;
             white-space: nowrap;
 
@@ -53,11 +54,16 @@
 
         td {
             width: calc(100% / 6);
+            height: auto;
             padding: 16px 0;
             font-family: $work;
             font-size: 14px;
             color: $primary-color;
             border-top: 1px solid #E5E7EB;
+            white-space: nowrap;
+        }
+
+        .email {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -65,6 +71,39 @@
 
         .userStatus {
             position: relative;
+            height: auto;
+
+            .actionMenu {
+                width: 100%;
+                position: absolute;
+                @include flex-start($direction: column);
+                right: 5%;
+                background: #FFF;
+                box-shadow: 3px 0px 20px 0px #0000000A;
+                border-radius: 0 0 8px 8px;
+                z-index: 10;
+                padding: 0;
+
+                button {
+                    @include flex-center;
+                    gap: 16px;
+                    width: 100%;
+                    color: $primary-color;
+                    font-family: $work;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 100%;
+                    letter-spacing: 0%;
+                    padding: 16px 24px;
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: #F9FAFB
+                    }
+                }
+            }
         }
 
         .status {
@@ -110,35 +149,162 @@
             }
         }
 
-        .actionMenu {
-            width: 10%;
-            position: absolute;
+
+    }
+}
+
+@include mobile {
+    .userTable {
+        width: 100%;
+        height: auto;
+        overflow: scroll;
+
+        .tableWrapper {
+            display: none;
+        }
+
+        .mobileTable {
             @include flex-start($direction: column);
-            right: 5%;
-            background: #FFF;
-            box-shadow: 3px 0px 20px 0px #0000000A;
-            border-radius: 0 0 8px 8px;
-            z-index: 10;
-            padding: 0;
+            gap: 16px;
+            width: 100%;
 
-            button {
-                @include flex-center;
-                gap: 16px;
+
+            .user {
+                @include flex-start;
+                align-items: center;
+                justify-content: space-between;
                 width: 100%;
-                color: $primary-color;
-                font-family: $work;
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 100%;
-                letter-spacing: 0%;
-                padding: 16px 24px;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
+                padding: 12px;
+                position: relative;
 
-                &:hover {
-                    background: #F9FAFB
+
+                .userDetails {
+                    @include flex-start($direction: column);
+                    gap: 8px;
+                    width: 50%;
+
+                    h2 {
+                        font-family: $work;
+                        font-size: 16px;
+                        color: $tertiary-color;
+
+                    }
+
+                    p {
+                        color: $primary-color;
+                        font-family: $work;
+                        font-size: 12px;
+                        width: 100%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    h4 {
+                        color: $primary-color;
+                        font-size: 12px;
+                        font-family: $work;
+                    }
                 }
+
+                .userStatus {
+                    @include flex-start;
+                    align-items: center;
+                    gap: 8px;
+                    width: 50%;
+
+                    .statusCheck {
+                        @include flex-start($direction: column);
+                        gap: 4px;
+                        align-items: center;
+                        width: 80%;
+
+                        .status {
+                            padding: 4px 12px;
+                            @include flex-center;
+                            border-radius: 100px;
+                            font-size: 12px;
+                            font-weight: 500;
+                            font-family: $work;
+                        }
+
+                        .Active {
+                            background: rgba(57, 205, 98, 0.1);
+                            color: #39cd62;
+                        }
+
+                        .Inactive {
+                            background: rgba(84, 95, 125, 0.1);
+                            color: $primary-color;
+                        }
+
+                        .Blacklisted {
+                            background: rgba(228, 3, 59, 0.1);
+                            color: #e4033b;
+                        }
+
+                        .Pending {
+                            background: rgba(233, 178, 0, 0.1);
+                            color: rgba(233, 178, 0, 1);
+                        }
+
+                        p {
+                            font-size: 12px;
+                            font-weight: 400;
+                            font-family: $work;
+                            color: $primary-color;
+                            text-align: center;
+                        }
+
+                    }
+
+                    .threeDots {
+                        @include flex-center;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 100%;
+                        cursor: pointer;
+
+                        &:hover {
+                            background: #F9FAFB
+                        }
+                    }
+
+                }
+
+                .actionMenu {
+                width: 60%;
+                position: absolute;
+                @include flex-start($direction: column);
+                top: 50%;
+                right: 5%;
+                background: #FFF;
+                box-shadow: 3px 0px 20px 0px #0000000A;
+                border-radius: 0 0 8px 8px;
+                z-index: 10;
+                padding: 0;
+
+                button {
+                    @include flex-center;
+                    gap: 16px;
+                    width: 100%;
+                    color: $primary-color;
+                    font-family: $work;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 100%;
+                    letter-spacing: 0%;
+                    padding: 16px 24px;
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    white-space: nowrap;
+
+                    &:hover {
+                        background: #F9FAFB
+                    }
+                }
+            }
             }
         }
     }

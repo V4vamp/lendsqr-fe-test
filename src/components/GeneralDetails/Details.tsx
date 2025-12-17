@@ -105,7 +105,7 @@ const Details = ({ user }: DetailsProps) => {
         </div>
       </section>
       {user.guarantors.map((item, idx) => (
-        <section className={styles.guarantor}>
+        <section key={idx} className={styles.guarantor}>
             <header className={styles.headerText}>
                 Guarantor
             </header>

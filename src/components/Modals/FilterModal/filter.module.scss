@@ -1,0 +1,78 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/fonts" as *;
+
+
+.filter {
+    width: 15%;
+    position: absolute;
+    @include flex-start($direction: column);
+    gap: 12px;
+    padding: 24px 12px;
+    background: $white;
+    border: 1px solid #545F7D24;
+    box-shadow: 3px 5px 20px 0px #0000000A;
+    overflow: auto;
+    border-radius: 4px;
+
+    .field {
+        @include flex-start($direction: column);
+        width: 100%;
+        gap: 8px;
+
+        label {
+            color: $primary-color;
+            font-family: Work Sans;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+            letter-spacing: 0%;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid rgba(33, 63, 125, 0.2);
+            border-radius: 8px;
+            background: transparent;
+            color: $primary-color;
+            outline: none;
+            font-size: 12px;
+
+            &:focus {
+                border: $secondary-color 1px solid;
+            }
+        }
+    }
+
+    .actions {
+        width: 100%;
+        @include flex-start;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+            width: 48%;
+            font-family: $work;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            text-align: center;
+            vertical-align: middle;
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+        }
+        .reset {
+                color: $primary-color;
+                border: $primary-color 1px solid;
+                background: transparent;
+            }
+            .filterButton {
+                color: $white;
+                background-color: $secondary-color;
+                border: $secondary-color 1px solid;
+            }
+    }
+}

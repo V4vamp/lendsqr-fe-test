@@ -17,6 +17,7 @@
         padding: 40px 0;
         @include flex-start($direction: column);
         overflow-y: scroll;
+        scrollbar-width: none;
         gap: 24px;
 
         .switchOrg {
@@ -101,5 +102,43 @@
                     left: 0;
                 }
             }
+    }
+}
+
+@include mobile {
+    .sideBar {
+        width: auto;
+        .container {
+            .switchOrg {
+                padding: 0 12px;
+                h4 {
+                    display: none;
+                }
+            }
+
+            .dashboardLink {
+                width: 100%;
+                padding: 12px;
+                justify-content: center;
+                h3 {
+                    display: none;
+                }
+            }
+
+            .dashboardTabs {
+                
+                h5 {
+                    display: none;
+                }
+
+                .tab {
+                    padding: 12px;
+                    justify-content: center;
+                    h3 {
+                        display: none;
+                    }
+                }
+            }
+        }
     }
 }

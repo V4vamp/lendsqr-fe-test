@@ -13,6 +13,14 @@
     top: 0;
     z-index: 10;
 
+    .hamburger {
+        display: none;
+    }
+
+    .mobileAvatar {
+        display: none;
+    }
+
     .navLogo {
         width: 20%;
         padding: 0 32px;
@@ -120,6 +128,92 @@
         box-shadow: 3px 0px 20px 0px #0000000A;
         background: #FFFFFF;
         width: 15%;
+
+        span {
+            cursor: pointer;
+            font-family: Work Sans;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: $tertiary-color;
+            opacity: 0.6;
+            padding: 12px 24px;
+            width: 100%;
+
+            &:hover {
+                background: rgba(33, 63, 125, 0.2);
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@include mobile {
+    .navbar {
+        width: 100%;
+        height: 76px;
+        align-items: center;
+
+        .hamburger {
+            display: block;
+            @include flex-start;
+            padding-left: 24px;
+            align-items: center;
+            gap: 12px;
+            .hamIcon {
+                color: $tertiary-color;
+            }
+        }
+
+        .mobileAvatar {
+            @include flex-start;
+            align-items: center;
+            padding-right: 24px;
+            gap: 12px;
+
+            .avatarWrapper {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                overflow: hidden;
+                position: relative;
+
+                .userAvatar {
+                    object-fit: cover;
+                }
+            }
+
+            .userName {
+                @include flex-start;
+                font-family: $work;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 100%;
+                letter-spacing: 0px;
+                color: $tertiary-color;
+                cursor: pointer;
+            }
+        }
+
+        .navLogo {
+            display: none;
+        }
+
+        .navItems {
+            display: none;
+        }
+    }
+
+    .mobileMenu {
+        position: absolute;
+        left: 0;
+        top: 76px;
+        @include flex-start($direction: column);
+        border-radius: 0 0 8px 8px;
+        box-shadow: 3px 0px 20px 0px #0000000A;
+        background: #FFFFFF;
+        width: 100%;
 
         span {
             cursor: pointer;

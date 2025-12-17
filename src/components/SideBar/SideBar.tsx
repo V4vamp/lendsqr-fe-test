@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useState } from "react";
 import styles from "./side.module.scss";
 import { customer, business, settings } from "./sideItems";
 import Link from "next/link";
@@ -10,13 +9,8 @@ import { usePathname } from "next/navigation";
 
 const SideBar = () => {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
 
   const isActive = (path: string) => pathname.startsWith(`/dashboard/${path}`);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
 
   return (
     <aside className={styles.sideBar}>

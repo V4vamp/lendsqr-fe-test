@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -7,19 +8,24 @@ import Link from "next/link";
 import { HiSearch } from "react-icons/hi";
 import { getSession, clearSession } from "@/utils/auth";
 import { MdOutlineArrowDropDown } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   const [isDropdown, setIsDropdown] = useState<boolean>(false);
   const [mounted, setMounted] = useState(false);
   const [session, setSession] = useState<any>(null);
+  const [openMenu, setOpenMenu] = React.useState<boolean>(false);
+
+  const toggleMenu = () => {
+    setOpenMenu(!openMenu);
+  };
 
   useEffect(() => {
-  queueMicrotask(() => {
-    setMounted(true);
-    setSession(getSession());
-  });
-}, []);
-
+    queueMicrotask(() => {
+      setMounted(true);
+      setSession(getSession());
+    });
+  }, []);
 
   if (!mounted) {
     return null;
@@ -36,9 +42,26 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
+      <span className={styles.hamburger}>
+        <GiHamburgerMenu onClick={toggleMenu} className={styles.hamIcon} size={20} />
+        <Image src={"/images/logo.png"} alt="Lendsqr" width={86} height={20} />
+      </span>
       <Link href={"/"} className={styles.navLogo}>
         <Image src={"/images/logo.png"} alt="Lendsqr" width={144} height={30} />
       </Link>
+      <span className={styles.mobileAvatar}>
+        <div className={styles.avatarWrapper}>
+          <Image
+            src={"/images/user.png"}
+            alt="Lendsqr"
+            fill
+            className={styles.userAvatar}
+          />
+        </div>
+        <span onClick={handleClickDropdown} className={styles.userName}>
+          {session?.user?.firstName || "User"}
+        </span>
+      </span>
       <div className={styles.navItems}>
         <div className={styles.inputWrapper}>
           <input type="text" placeholder="Search for anything" />
@@ -76,6 +99,13 @@ const Navbar = () => {
       </div>
       {isDropdown && (
         <div className={styles.dropdown}>
+          <span>Profile</span>
+          <span>Settings</span>
+          <span onClick={logout}>Logout</span>
+        </div>
+      )}
+      {openMenu && (
+        <div className={styles.mobileMenu}>
           <span>Profile</span>
           <span>Settings</span>
           <span onClick={logout}>Logout</span>

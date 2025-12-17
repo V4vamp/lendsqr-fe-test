@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
@@ -22,20 +23,18 @@ const Page = () => {
     setActiveTab(index);
   };
 
-   useEffect(() => {
+ useEffect(() => {
   const userId = Number(id);
   if (Number.isNaN(userId)) return;
 
   setLoading(true);
 
-  Promise.resolve().then(() => {
-    const storedUsers = localStorage.getItem("lendsqr_users");
-    const users: User[] = storedUsers ? JSON.parse(storedUsers) : usersData;
-    const foundUser = users.find((u) => u.id === userId);
+  const storedUsers = localStorage.getItem("lendsqr_users");
+  const users: User[] = storedUsers ? JSON.parse(storedUsers) : usersData;
+  const foundUser = users.find((u) => u.id === userId);
 
-    setUser(foundUser || null);
-    setLoading(false);
-  });
+  setUser(foundUser || null);
+  setLoading(false);
 }, [id]);
 
 
@@ -96,13 +95,15 @@ const Page = () => {
         </header>
         <div className={styles.userPersonalDetails}>
           <section className={styles.detailsSection}>
-            <span className={styles.userAvatar}>
-              <AiOutlineUser size={30} color="#213F7D" />
-            </span>
-            <span className={styles.userFullName}>
-              <h4>{user.profile.fullName}</h4>
-              <p>{user.id}</p>
-            </span>
+            <div className={styles.userProfileDetails}>
+              <span className={styles.userAvatar}>
+                <AiOutlineUser size={30} color="#213F7D" />
+              </span>
+              <span className={styles.userFullName}>
+                <h4>{user.profile.fullName}</h4>
+                <p>{user.id}</p>
+              </span>
+            </div>
             <span className={styles.userTier}>
               <p>User&apos;s Tier</p>
               <span className={styles.tiers}>
@@ -131,14 +132,20 @@ const Page = () => {
               "Savings",
               "App and System",
             ].map((item, idx) => (
-              <button onClick={() => handleClickTab(idx)} key={idx} className={`${styles.pageTab} ${activeTab === idx ? styles.activeTab : ""}`}>
+              <button
+                onClick={() => handleClickTab(idx)}
+                key={idx}
+                className={`${styles.pageTab} ${
+                  activeTab === idx ? styles.activeTab : ""
+                }`}
+              >
                 {item}
               </button>
             ))}
           </section>
         </div>
         <div className={styles.tabContent}>
-          {activeTab === 0 && <Details user={user}/> }
+          {activeTab === 0 && <Details user={user} />}
         </div>
       </div>
     </Layout>

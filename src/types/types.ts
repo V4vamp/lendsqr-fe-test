@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export interface SignUp {
   firstName: string;
   lastName: string;
@@ -86,4 +87,13 @@ export interface User {
   education: Education;
   socials: Socials;
   guarantors: Guarantor[];
+}
+
+export interface UserFilters {
+  organisation: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  status: string;
+  dateJoined: string;
 }
