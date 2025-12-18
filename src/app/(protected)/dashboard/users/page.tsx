@@ -7,6 +7,7 @@ import api from "@/lib/api";
 import { User } from "@/types/types";
 import Image from "next/image";
 import UsersTable from "@/components/UsersTable/UsersTable";
+import Loader from "@/components/Loader/Loader";
 
 const Page = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -29,7 +30,7 @@ const Page = () => {
     fetchUsers();
   }, [users.length]);
 
-  if (loading) return <p className={styles.loading}>Loading users...</p>;
+  if (loading) return <Loader />;
   if (error) return <p className={styles.error}>{error}</p>;
 
   const usersCount = users.length;

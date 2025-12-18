@@ -11,6 +11,7 @@ import Link from "next/link";
 import { AiFillStar, AiOutlineStar, AiOutlineUser } from "react-icons/ai";
 import Details from "@/components/GeneralDetails/Details";
 import EmptyData from "@/components/EmptyData/EmptyData";
+import Loader from "@/components/Loader/Loader";
 
 const Page = () => {
   const { id } = useParams<{ id: string }>();
@@ -60,7 +61,7 @@ const Page = () => {
     setUser((prev) => (prev ? { ...prev, status } : prev));
   };
 
-  if (loading) return <p>Loading user...</p>;
+  if (loading) return <Loader />;
   if (!user) return <p>User not found</p>;
 
   return (

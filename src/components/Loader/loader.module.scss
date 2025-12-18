@@ -1,0 +1,58 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/fonts" as *;
+
+.loader {
+  width: 100%;
+  height: 100dvh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  @include flex-start($direction: column);
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  background: rgba(233, 234, 235, 0.60);
+
+  .logo {
+    filter: grayscale(100%) opacity(0.5);
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+
+  .loading {
+    color: $secondary-color;
+    width: 4px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    box-shadow: 19px 0 0 7px, 38px 0 0 3px, 57px 0 0 0;
+    transform: translateX(-38px);
+    animation: l21 .5s infinite alternate linear;
+  }
+
+  @keyframes l21 {
+    50% {
+      box-shadow: 19px 0 0 3px, 38px 0 0 7px, 57px 0 0 3px
+    }
+
+    100% {
+      box-shadow: 19px 0 0 0, 38px 0 0 3px, 57px 0 0 7px
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      filter: grayscale(100%) opacity(0.5);
+    }
+
+    50% {
+      transform: scale(1.15);
+      filter: grayscale(0%) opacity(1);
+    }
+
+    100% {
+      transform: scale(1);
+      filter: grayscale(100%) opacity(0.5);
+    }
+  }
+}

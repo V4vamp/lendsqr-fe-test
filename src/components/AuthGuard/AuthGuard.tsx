@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/hooks/useAuth";
+import Loader from "../Loader/Loader";
 
 export default function AuthGuard({
   children,
@@ -9,7 +10,7 @@ export default function AuthGuard({
 }) {
   const { loading, isAuthenticated } = useAuth("/signin");
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
   if (!isAuthenticated) return null;
 
   return <>{children}</>;
