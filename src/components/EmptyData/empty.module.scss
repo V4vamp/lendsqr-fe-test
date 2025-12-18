@@ -1,0 +1,23 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/fonts" as *;
+
+
+.empty {
+    width: 60vw;
+    height: 50dvh;
+    @include flex-center($direction: column);
+    gap: 16px;
+
+    .bin {
+        color: $tertiary-color;
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 500;
+        font-family: $work;
+        color: $primary-color;
+        text-align: center;
+        width: 50%;
+    }
+}

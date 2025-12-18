@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getSession } from "@/utils/auth";
 import { useRouter } from "next/navigation";
 
-export const useAuth = (redirectTo = "/login") => {
+export const useAuth = (redirectTo = "/signin") => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);

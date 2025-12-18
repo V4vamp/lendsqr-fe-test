@@ -26,6 +26,31 @@
         }
     }
 }
+@include tablet {
+    .layout {
+        width: 100%;
+        height: auto;
+
+        .mainLayout {
+            width: 100%;
+
+            .sideBarContainer {
+                display: none;
+            }
+
+            .content {
+                width: 100%;
+                height: auto;
+                margin-top: 76px;
+                // height: calc(100dvh - 76px);
+                // margin-left: 10%;
+                padding: 0 24px;
+                overflow: scroll;
+                scrollbar-width: none;
+            }
+        }
+    }
+}
 
 @include mobile {
     .layout {
@@ -36,15 +61,16 @@
             width: 100%;
 
             .sideBarContainer {
-                width: auto;
+                display: none;
             }
 
             .content {
+                width: 100%;
                 height: auto;
                 margin-top: 76px;
                 // height: calc(100dvh - 76px);
-                margin-left: 20%;
-                padding: 0 8px;
+                // margin-left: 20%;
+                padding: 0 24px;
                 overflow: scroll;
                 scrollbar-width: none;
             }

@@ -1,5 +1,5 @@
-@use "../../../../styles/mixins" as *;
-@use "../../../../styles/fonts" as *;
+@use "../../../../../styles/mixins" as *;
+@use "../../../../../styles/fonts" as *;
 
 .userPage {
     width: 100%;
@@ -215,6 +215,34 @@
     .tabContent {
         width: 100%;
         margin-top: 1dvh;
+    }
+}
+
+@include tablet {
+    .userPage {
+        width: 100%;
+        margin-top: 0;
+
+        .userPersonalDetails {
+            width: 100%;
+
+            .pageTabs {
+                width: 100%;
+                overflow-x: scroll;
+                scrollbar-width: none;
+
+                .pageTab {
+                    font-size: 12px;
+                    width: auto;
+                    padding: 8px 12px;
+                    text-wrap: nowrap;
+                }
+            }
+        }
+
+        .tabContent {
+            height: auto;
+        }
     }
 }
 

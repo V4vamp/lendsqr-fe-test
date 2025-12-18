@@ -71,13 +71,13 @@ $breakpoints: (
 }
 
 @mixin tablet {
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1024px) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     @content;
   }
 }

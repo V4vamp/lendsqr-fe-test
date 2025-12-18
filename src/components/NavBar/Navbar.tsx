@@ -9,6 +9,8 @@ import { HiSearch } from "react-icons/hi";
 import { getSession, clearSession } from "@/utils/auth";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
+import SideBar from "../SideBar/SideBar";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const Navbar = () => {
   const [isDropdown, setIsDropdown] = useState<boolean>(false);
@@ -19,7 +21,6 @@ const Navbar = () => {
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   };
-
   useEffect(() => {
     queueMicrotask(() => {
       setMounted(true);
@@ -43,7 +44,11 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <span className={styles.hamburger}>
-        <GiHamburgerMenu onClick={toggleMenu} className={styles.hamIcon} size={20} />
+        <GiHamburgerMenu
+          onClick={toggleMenu}
+          className={styles.hamIcon}
+          size={20}
+        />
         <Image src={"/images/logo.png"} alt="Lendsqr" width={86} height={20} />
       </span>
       <Link href={"/"} className={styles.navLogo}>
@@ -60,6 +65,7 @@ const Navbar = () => {
         </div>
         <span onClick={handleClickDropdown} className={styles.userName}>
           {session?.user?.firstName || "User"}
+          <MdOutlineArrowDropDown />
         </span>
       </span>
       <div className={styles.navItems}>
@@ -106,9 +112,13 @@ const Navbar = () => {
       )}
       {openMenu && (
         <div className={styles.mobileMenu}>
-          <span>Profile</span>
-          <span>Settings</span>
-          <span onClick={logout}>Logout</span>
+          <span className={styles.span}></span>
+          <IoIosCloseCircleOutline
+            className={styles.close}
+            size={24}
+            onClick={() => setOpenMenu(false)}
+          />
+          <SideBar />
         </div>
       )}
     </nav>

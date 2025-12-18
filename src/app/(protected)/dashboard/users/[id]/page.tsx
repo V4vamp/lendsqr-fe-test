@@ -4,13 +4,13 @@
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { User } from "@/types/types";
-import usersData from "../../../../../public/mock/users.json";
+import usersData from "../../../../../../public/mock/users.json";
 import styles from "./page.module.scss";
-import Layout from "@/components/Layout/Layout";
 import { HiArrowLongLeft } from "react-icons/hi2";
 import Link from "next/link";
 import { AiFillStar, AiOutlineStar, AiOutlineUser } from "react-icons/ai";
 import Details from "@/components/GeneralDetails/Details";
+import EmptyData from "@/components/EmptyData/EmptyData";
 
 const Page = () => {
   const { id } = useParams<{ id: string }>();
@@ -64,8 +64,7 @@ const Page = () => {
   if (!user) return <p>User not found</p>;
 
   return (
-    <Layout>
-      <div className={styles.userPage}>
+    <div className={styles.userPage}>
         <Link className={styles.goBackLink} href={"/dashboard/users"}>
           <HiArrowLongLeft size={26} color="#545F7D" />
           <span>Back to Users</span>
@@ -146,9 +145,13 @@ const Page = () => {
         </div>
         <div className={styles.tabContent}>
           {activeTab === 0 && <Details user={user} />}
+          {activeTab === 1 && <EmptyData text="No documents to display" />}
+          {activeTab === 2 && <EmptyData text="Bank details not available" /> }
+          {activeTab === 3 && <EmptyData text="No loans data not available" />}
+          {activeTab === 4 && <EmptyData text="User has no savings" />}
+          {activeTab === 5 && <EmptyData text="No Apps or Systems connected to this User" />}
         </div>
       </div>
-    </Layout>
   );
 };
 

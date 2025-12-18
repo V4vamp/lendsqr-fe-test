@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lendsqr Frontend Assessment
 
-## Getting Started
+This project is a frontend implementation of the Lendsqr Admin Dashboard as part of the Lendsqr Frontend Engineering assessment.
 
-First, run the development server:
+## Live Demo
+👉 https://yusuf-mukhtar-lendsqr-fe-test.vercel.app/
+
+## Github Repository 
+👉 https://github.com/V4vamp/lendsqr-fe-test
+
+## Documentation
+👉 https://docs.google.com/document/d/1-pSPO8taT_dK2pLbC38OlJUYYAZzU1GrhS3ZXnk4N4A/edit?usp=sharing
+
+---
+
+## Tech Stack
+- Next.js (App Router)
+- TypeScript
+- SCSS Modules
+- React Icons
+
+## Features
+- Client-side authentication flow
+- Users list with pagination and filters
+- Dynamic user detail pages
+- User activation and blacklisting
+- Persistent state using localStorage
+- Responsive layout for desktop and mobile
+
+## Project Structure
+app/
+components/
+hooks/
+utils/
+public/mock/
+
+pgsql
+Copy code
+
+## Authentication
+- Authentication is handled via a custom hook.
+- The app checks for a session in `localStorage` before rendering protected routes.
+- Unauthenticated users are redirected to the login page.
+
+## Data Management
+- User data is initially loaded from a mock JSON file.
+- Data is persisted to `localStorage` to simulate backend storage.
+- All user actions update both local state and storage.
+
+## Filtering & Pagination
+- Column-level filters for organisation, name, email, phone, date joined, and status.
+- Pagination supports dynamic page calculation and adjustable rows per page.
+
+## User Details
+- Dynamic routing using `/dashboard/users/[id]`
+- Tabbed interface for user information
+- Status updates sync across pages
+
+## Design Decisions
+- SCSS modules were chosen for style isolation.
+- LocalStorage was used to simulate a backend for persistence.
+- ESLint rules were followed strictly, with scoped exceptions where behavior was intentional and documented.
+
+## Running the Project
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Lint & Build
+bash
+Copy code
+npm run lint
+npm run build
+Author
+Muhammad Mukhtar

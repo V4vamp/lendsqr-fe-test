@@ -11,6 +11,7 @@ import { BiUserX, BiUserCheck } from "react-icons/bi";
 import { PiEye } from "react-icons/pi";
 import Pagination from "../Pagination/Pagination";
 import FilterModal from "../Modals/FilterModal/FilterModal";
+import EmptyData from "../EmptyData/EmptyData";
 
 interface Props {
   users: User[];
@@ -26,11 +27,11 @@ const tableItems = [
 
 const UsersTable = ({ users }: Props) => {
   const router = useRouter();
-  const actionRef = React.useRef<
-    HTMLTableDataCellElement | HTMLSpanElement | null
-  >(null);
+  const actionRef = React.useRef<HTMLTableCellElement | null>(null);
+  const actionMobileRef = React.useRef<HTMLTableCellElement | null>(null);
   const [usersData, setUsersData] = useState(users);
   const [showActions, setShowActions] = useState<number | null>(null);
+  const [showMobileActions, setShowMobileActions] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [filters, setFilters] = useState<UserFilters>({
@@ -112,6 +113,10 @@ const UsersTable = ({ users }: Props) => {
     setShowActions((prev) => (prev === id ? null : id));
   };
 
+  const handleClickMobileDots = (id: number) => {
+    setShowMobileActions((prev) => (prev === id ? null : id));
+  };
+
   const usersStorageKey = "lendsqr_users";
 
   useEffect(() => {
@@ -167,7 +172,12 @@ const UsersTable = ({ users }: Props) => {
         !actionRef.current.contains(event.target as Node)
       ) {
         setShowActions(null);
-        setShowFilter(false);
+      }
+      if (
+        actionMobileRef.current &&
+        !actionMobileRef.current.contains(event.target as Node)
+      ) {
+        setShowMobileActions(null);
       }
     };
 
@@ -197,7 +207,7 @@ const UsersTable = ({ users }: Props) => {
             </tr>
           </thead>
           {showFilter && (
-            <span ref={actionRef} className={styles.filterUsers}>
+            <span className={styles.filterUsers}>
               <FilterModal
                 filters={filters}
                 onChange={updateFilter}
@@ -208,100 +218,132 @@ const UsersTable = ({ users }: Props) => {
             </span>
           )}
           <tbody className={styles.tableBody}>
-            {paginatedUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{capitalizeText(user.organization)}</td>
-                <td>{user.username}</td>
-                <td className={styles.email}>{user.email}</td>
-                <td>0{user.phone}</td>
-                <td>{user.dateJoined}</td>
-                <td className={styles.userStatus}>
-                  <span className={`${styles.status} ${styles[user.status]}`}>
-                    {user.status}
-                  </span>
-                  <span
-                    onClick={() => handleClickDots(user.id)}
-                    className={styles.threeDots}
-                  >
-                    <BsThreeDotsVertical />
-                  </span>
-                  {showActions === user.id && (
-                    <span ref={actionRef} className={styles.actionMenu}>
-                      <button onClick={() => viewUser(user.id)}>
-                        <PiEye />
-                        View Details
-                      </button>
-
-                      {user.status !== "Blacklisted" && (
-                        <button onClick={() => blacklistUser(user.id)}>
-                          <BiUserX />
-                          Blacklist User
-                        </button>
-                      )}
-
-                      {(user.status === "Inactive" ||
-                        user.status === "Pending") && (
-                        <button onClick={() => activateUser(user.id)}>
-                          <BiUserCheck />
-                          Activate User
-                        </button>
-                      )}
+            {paginatedUsers.length === 0 ? (
+              <EmptyData text="Your search didn't return any result" />
+            ) : (
+              paginatedUsers.map((user) => (
+                <tr key={user.id}>
+                  <td>{capitalizeText(user.organization)}</td>
+                  <td>{user.username}</td>
+                  <td className={styles.email}>{user.email}</td>
+                  <td>0{user.phone}</td>
+                  <td>{user.dateJoined}</td>
+                  <td className={styles.userStatus}>
+                    <span className={`${styles.status} ${styles[user.status]}`}>
+                      {user.status}
                     </span>
-                  )}
-                </td>
-              </tr>
-            ))}
+                    <span
+                      onClick={() => handleClickDots(user.id)}
+                      className={styles.threeDots}
+                    >
+                      <BsThreeDotsVertical />
+                    </span>
+                    {showActions === user.id && (
+                      <span
+                        onClick={(e) => e.stopPropagation()}
+                        ref={actionRef}
+                        className={styles.actionMenu}
+                      >
+                        <button onClick={() => viewUser(user.id)}>
+                          <PiEye />
+                          View Details
+                        </button>
+
+                        {user.status !== "Blacklisted" && (
+                          <button onClick={() => blacklistUser(user.id)}>
+                            <BiUserX />
+                            Blacklist User
+                          </button>
+                        )}
+
+                        {(user.status === "Inactive" ||
+                          user.status === "Pending") && (
+                          <button onClick={() => activateUser(user.id)}>
+                            <BiUserCheck />
+                            Activate User
+                          </button>
+                        )}
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
       <div className={styles.mobileTable}>
-        <div className={styles.filter}></div>
-        {paginatedUsers.map((user) => (
-          <div className={styles.user} key={user.id}>
-            <div className={styles.userDetails}>
-              <h2>{user.profile.fullName}</h2>
-              <p>{user.email}</p>
-              <p>0{user.phone}</p>
-              <h4>{user.organization}</h4>
-            </div>
-            <div className={styles.userStatus}>
-              <div className={styles.statusCheck}>
-                <span className={`${styles.status} ${styles[user.status]}`}>
-                  {user.status}
-                </span>
-                <p>{user.dateJoined}</p>
-              </div>
-              <span
-                onClick={() => handleClickDots(user.id)}
-                className={styles.threeDots}
-              >
-                <BsThreeDotsVertical size={12} color="#545F7D" />
-              </span>
-            </div>
-            {showActions === user.id && (
-              <span ref={actionRef} className={styles.actionMenu}>
-                <button onClick={() => viewUser(user.id)}>
-                  <PiEye />
-                  View Details
-                </button>
-
-                {user.status !== "Blacklisted" && (
-                  <button onClick={() => blacklistUser(user.id)}>
-                    <BiUserX />
-                    Blacklist User
-                  </button>
-                )}
-
-                {(user.status === "Inactive" || user.status === "Pending") && (
-                  <button onClick={() => activateUser(user.id)}>
-                    <BiUserCheck />
-                    Activate User
-                  </button>
-                )}
-              </span>
-            )}
+        <div className={styles.filter}>
+          <h6>Filter</h6>
+          <MdFilterList size={16} color="#545F7D" onClick={toggleFilter} />
+          {showFilter && (
+            <span className={styles.filterUsers}>
+              <FilterModal
+                filters={filters}
+                onChange={updateFilter}
+                onReset={resetFilters}
+                onApply={() => setShowFilter(false)}
+                organisations={organisations}
+              />
+            </span>
+          )}
+        </div>
+        {paginatedUsers.length === 0 ? (
+          <div className={styles.emptyState}>
+            <EmptyData text="Your search didn't return any result" />
           </div>
-        ))}
+        ) : (
+          paginatedUsers.map((user) => (
+            <div className={styles.user} key={user.id}>
+              <div className={styles.userDetails}>
+                <h2>{user.profile.fullName}</h2>
+                <p>{user.email}</p>
+                <p>0{user.phone}</p>
+                <h4>{user.organization}</h4>
+              </div>
+
+              <div className={styles.userStatus}>
+                <div className={styles.statusCheck}>
+                  <span className={`${styles.status} ${styles[user.status]}`}>
+                    {user.status}
+                  </span>
+                  <p>{user.dateJoined}</p>
+                </div>
+
+                <span
+                  onClick={() => handleClickMobileDots(user.id)}
+                  className={styles.threeDots}
+                >
+                  <BsThreeDotsVertical size={12} color="#545F7D" />
+                </span>
+              </div>
+
+              {showMobileActions === user.id && (
+                <span ref={actionRef} className={styles.actionMenu}>
+                  <button onClick={() => viewUser(user.id)}>
+                    <PiEye />
+                    View Details
+                  </button>
+
+                  {user.status !== "Blacklisted" && (
+                    <button onClick={() => blacklistUser(user.id)}>
+                      <BiUserX />
+                      Blacklist User
+                    </button>
+                  )}
+
+                  {(user.status === "Inactive" ||
+                    user.status === "Pending") && (
+                    <button onClick={() => activateUser(user.id)}>
+                      <BiUserCheck />
+                      Activate User
+                    </button>
+                  )}
+                </span>
+              )}
+            </div>
+          ))
+        )}
       </div>
       <Pagination
         totalItems={filteredUsers.length}

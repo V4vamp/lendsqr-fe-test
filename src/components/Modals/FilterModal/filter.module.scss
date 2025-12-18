@@ -13,6 +13,7 @@
     box-shadow: 3px 5px 20px 0px #0000000A;
     overflow: auto;
     border-radius: 4px;
+    background: #FFF;
 
     .field {
         @include flex-start($direction: column);
@@ -74,5 +75,21 @@
                 background-color: $secondary-color;
                 border: $secondary-color 1px solid;
             }
+    }
+}
+
+@include tablet {
+    .filter {
+        width: 40%;
+        background: #FFF;
+        z-index: 10;
+    }
+}
+
+@include mobile {
+    .filter {
+        width: 100%;
+        background: #FFF;
+        z-index: 10;
     }
 }

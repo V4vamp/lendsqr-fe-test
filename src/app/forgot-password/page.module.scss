@@ -158,6 +158,34 @@
     }
 }
 
+@include tablet {
+    .form {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5dvh;
+        justify-content: flex-start;
+
+        .formText {
+            width: 100%;
+            margin-bottom: 0;
+
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+
+        label {
+            input {
+                padding: 8px 16px;
+            }
+        }
+    }
+}
+
 @include mobile {
     .form {
         width: 100%;

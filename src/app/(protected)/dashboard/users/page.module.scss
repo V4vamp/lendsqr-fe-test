@@ -1,5 +1,5 @@
-@use "../../../styles/mixins" as *;
-@use "../../../styles/fonts" as *;
+@use "../../../../styles/mixins" as *;
+@use "../../../../styles/fonts" as *;
 
 .main {
     @include flex-start($direction: column);
@@ -63,6 +63,33 @@
                 letter-spacing: 0%;
                 text-transform: uppercase;
                 color: rgba(33, 63, 125, 1);
+            }
+        }
+    }
+}
+
+@include tablet {
+    .main {
+        height: auto;
+        padding: 8px 0;
+        gap: 24px;
+        overflow: scroll;
+
+        h1 {
+            font-size: 20px;
+        }
+
+        .usersDataCards {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            column-gap: 12px;
+            row-gap: 12px;
+
+            .card {
+                padding: 12px 16px;
+                h4 {
+                    font-size: 16px;
+                }
             }
         }
     }
