@@ -34,7 +34,7 @@ hooks/
 utils/
 public/mock/
 
-pgsql
+
 Copy code
 
 ## Authentication
@@ -61,6 +61,22 @@ Copy code
 - LocalStorage was used to simulate a backend for persistence.
 - ESLint rules were followed strictly, with scoped exceptions where behavior was intentional and documented.
 
+## Testing
+
+Unit tests were implemented using Jest and React Testing Library.
+
+The testing approach focused on:
+- Positive scenarios (expected behavior)
+- Negative scenarios (edge cases and invalid states)
+
+Covered areas include:
+- Authentication logic
+- Filtering functionality
+- Pagination logic
+- User status updates (activate / blacklist)
+
+This ensures predictable behavior and safeguards against regressions.
+
 ## Running the Project
 
 ```bash
@@ -71,5 +87,9 @@ bash
 Copy code
 npm run lint
 npm run build
-Author
-Muhammad Mukhtar
+npm run test
+```
+
+## Author
+
+- Muhammad Mukhtar
